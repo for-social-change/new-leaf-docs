@@ -12,6 +12,21 @@
 - [Backend](https://github.com/for-social-change/new-leaf-backend)
 - [E2E tests](https://github.com/for-social-change/new-leaf-e2e)
 
+## Background
+
+This app's infrastructure was set up by [Zero](https://github.com/commitdev/zero) in July 2021. 
+Our  configuration uses:
+- GitHub Actions for CI
+- [zero-notification-service](https://github.com/commitdev/zero-notification-service) for sending SMS using Twilio and emails using SendGrid
+- Ory Kratos and Oathkeeper for user management and authorization
+- NodeJS backend with Postgres database
+- React frontend and no landing page
+- No logging to save on costs
+
+## Local Development
+
+The `admin-user` IAM user is used for AWS CLI. You'll need to create an AWS credentials file with the `admin-user` access key and secret key. Log into AWS with the root user admin@forsocialchange.org and create a new access key for `admin-user` to use as your AWS credentials.
+
 ## CI pipeline
 This involves manually triggering GitHub workflows at certain points.
 - When you push to the frontend or backend repos, the `Staging deploy` workflow is automatically triggered which deploys to staging
