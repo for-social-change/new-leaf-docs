@@ -13,7 +13,6 @@
 - [E2E tests](https://github.com/for-social-change/new-leaf-e2e)
 
 ## Background
-
 This app's infrastructure was set up using a bootstrapping tool called [Zero](https://github.com/commitdev/zero) in July 2021. Read the [docs here](https://getzero.dev/docs/zero/about/overview) for more information and [join the Slack group](https://slack.getzero.dev/) to ask the team if you have any questions.
 
 Our configuration uses:
@@ -31,7 +30,7 @@ Although [using Teleprescence](https://getzero.dev/docs/modules/aws-eks-stack/gu
 Here are the steps to getting the app running locally:
 1. Clone the [frontend](https://github.com/for-social-change/new-leaf-frontend) and [backend](https://github.com/for-social-change/new-leaf-backend) repos.
 2. In the BE repo, run `npm install` to install packages, then (after making sure you're running Docker) run `docker-compose -f local-auth-setup.yml up` which will run the BE locally and do the database migrations.
-3. In the FE repo, run `yarn` to install packages, then run `yarn start` to run the FE locally.
+3. In the FE repo, run `yarn` to install packages, then run `yarn start` to run the FE on http://127.0.0.1:3000/.
 
 To delete your local databases, run `docker-compose -f local-auth-setup.yml down -v`.
 
@@ -49,7 +48,25 @@ There are 2 databases:
 - The `userauth` database contains the `identities` (objects containing `email` and `user_type`) and related tables that are managed by Kratos.
 - The `newleaf` database contains the rest of the data for the app. The `auth_id` field of a row in the `users` table is the id of the corresponding user in the `identities` table in the `userauth` database. You can learn more about how the users and accounts are created on the right side of [this diagram](https://github.com/for-social-change/new-leaf-docs/blob/main/BackendArchitectureAndAccountCreationFlows.pdf).
 
-To access the databases during local development with Docker, 
+To access the databases during local development with Docker, run the BE and then open a postgres client like Postico. 
+
+Fill in the fields like this to access the `newleaf` database: 
+- Host: 127.0.0.1
+- Port: 5432
+- User: foo
+- Password: foofoofoo
+- Database: new-leaf
+
+And fill in the fields like this to access the `userauth` database: 
+- Host: 127.0.0.1
+- Port: 5433
+- User: kratos
+- Password: secret
+- Database: kratos
+
+These fields are all found and can be configured in `local-auth-setup.yml` in the BE repo.
+
+To access the databases in production or staging, you will need to port forward into a pod. The `db-gateway` pod in the production environment was created for this purpose. Run `kubectl port-forward pod/db-gateway 8080:5432 -n new-leaf`, then you'll be able to access
 
 ## CI pipeline
 This involves manually triggering GitHub workflows at certain points.
