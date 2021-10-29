@@ -1,5 +1,15 @@
 # New Leaf Expansion App Docs
 
+## Things to do before project launch
+- Create the client info CSV import script
+- Load testing
+- Delete test accounts on production (see [database section](https://github.com/for-social-change/new-leaf-docs/#database-access) and [Test accounts section](https://github.com/for-social-change/new-leaf-docs/#test-accounts))
+- There are some features that aren't covered by automated tests and I checked that they worked, but you may want to double-check these closer to the project launch:
+  - Password recovery
+  - Creating a new account
+  - Cronjob for sending SMS for upcoming appointments and surveys that aren't completed (`cronjob-reminders`)
+  - Cronjob for resetting full resources (`cronjob-resources`)
+
 ## Links
 - Production - https://fschome.org
 - Staging - https://fschome-staging.org
@@ -78,8 +88,25 @@ The User and Password for both databases can be found in the `new-leaf/kubernete
 ## CI pipeline
 This involves manually triggering GitHub workflows at certain points.
 - When you push to the frontend or backend repos, the `Staging deploy` workflow is automatically triggered which deploys to staging
-- After the workflow completes, go to the [E2E repo](https://github.com/for-social-change/new-leaf-e2e) and manually run the `e2e tests` workflow which will run the Cypress E2E tests on staging
+- After the workflow completes, go to the [E2E repo](https://github.com/for-social-change/new-leaf-e2e) and manually run the `e2e tests` workflow which will run the Cypress E2E tests on staging. Avoid making changes on staging because they might cause these tests to fail.
 - If the workflow completes without errors or test failures, go back to the FE/BE repo and manually run the `Production deploy` workflow to deploy to production
+
+## Test accounts
+The test accounts use maildrop.cc emails for convenience but they are not secure (anyone can access these inboxes, go see at maildrop.cc) so the production test accounts should be deleted before the project launches. To delete accounts, delete the applicable rows in the `users` and `identities` tables (see the [Database Access section](https://github.com/for-social-change/new-leaf-docs/#database-access) for more info).
+
+Staging
+- Researcher - fsc.researcher1@maildrop.cc
+- Connector - fsc.connector1@maildrop.cc
+- Another connector - fsc.connector2@maildrop.cc
+- Cash client - fsc.client.cash1@maildrop.cc
+- Non-cash client - fsc.client.cash2@maildrop.cc
+
+Production
+- Researcher - fsc.researcher1@maildrop.cc
+- Connector - robyn@forsocialchange.org
+- Cash client - fsc.client1@maildrop.cc
+- Another cash client - fsc.client2@maildrop.cc
+- Non-cash client - fsc.client3@maildrop.cc
 
 ## Services we're paying for
 - Amazon Web Services - app infrastructure
