@@ -79,9 +79,9 @@ These fields are all found and can be configured in `local-auth-setup.yml` in th
 To access the databases in production or staging, you will need to port forward into a pod. The `db-gateway` pod in the production environment was created for this purpose (there isn't one in staging though, but you can create it by referencing [this handy post](https://github.com/kubernetes/kubernetes/issues/72597#issuecomment-518617501). Make sure you are in the production context in kubectl with ` kubectl config use-context new-leaf-prod-ca-central-1` and run `kubectl port-forward pod/db-gateway 8080:5432 -n new-leaf`. 
 
 Now you can set up a profile on Postico with these fields for both databases:
-Host: 127.0.0.1
-Port: 8080
-Database: `userauth` or `newleaf`
+- Host: 127.0.0.1
+- Port: 8080
+- Database: `userauth` or `newleaf`
 
 The User and Password for both databases can be found in the `new-leaf/kubernetes/prod/new-leaf` secret in AWS Secrets Manager.
 
@@ -92,7 +92,7 @@ This involves manually triggering GitHub workflows at certain points.
 - If the workflow completes without errors or test failures, go back to the FE/BE repo and manually run the `Production deploy` workflow to deploy to production
 
 ## Test accounts
-The test accounts use maildrop.cc emails for convenience but they are not secure (anyone can access these inboxes, go see at maildrop.cc) so the production test accounts should be deleted before the project launches. To delete accounts, delete the applicable rows in the `users` and `identities` tables (see the [Database Access section](https://github.com/for-social-change/new-leaf-docs/#database-access) for more info).
+The test accounts use maildrop emails for convenience but they are not secure (anyone can access these inboxes, go see at https://maildrop.cc) so the production test accounts should be deleted before the project launches. To delete accounts, delete the applicable rows in the `users` and `identities` tables (see the [Database Access section](https://github.com/for-social-change/new-leaf-docs/#database-access) for more info).
 
 Staging
 - Researcher - fsc.researcher1@maildrop.cc
