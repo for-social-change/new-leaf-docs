@@ -66,7 +66,14 @@ And fill in the fields like this to access the `userauth` database:
 
 These fields are all found and can be configured in `local-auth-setup.yml` in the BE repo.
 
-To access the databases in production or staging, you will need to port forward into a pod. The `db-gateway` pod in the production environment was created for this purpose. Run `kubectl port-forward pod/db-gateway 8080:5432 -n new-leaf`, then you'll be able to access
+To access the databases in production or staging, you will need to port forward into a pod. The `db-gateway` pod in the production environment was created for this purpose (there isn't one in staging though, but you can create it by referencing [this handy post](https://github.com/kubernetes/kubernetes/issues/72597#issuecomment-518617501). Make sure you are in the production context in kubectl with ` kubectl config use-context new-leaf-prod-ca-central-1` and run `kubectl port-forward pod/db-gateway 8080:5432 -n new-leaf`. 
+
+Now you can set up a profile on Postico with these fields for both databases:
+Host: 127.0.0.1
+Port: 8080
+Database: `userauth` or `newleaf`
+
+The User and Password for both databases can be found in the `new-leaf/kubernetes/prod/new-leaf` secret in AWS Secrets Manager.
 
 ## CI pipeline
 This involves manually triggering GitHub workflows at certain points.
