@@ -1,4 +1,4 @@
-# New Leaf Expansion App Docs
+# New Leaf Expansion App
 
 ## Things to do before project launch
 - Create the client info CSV import script
