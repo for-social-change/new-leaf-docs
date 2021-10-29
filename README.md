@@ -3,7 +3,7 @@
 ## Things to do before project launch
 - Create the client info CSV import script
 - Load testing
-- Delete test accounts on production (see [database section](https://github.com/for-social-change/new-leaf-docs/#database-access) and [Test accounts section](https://github.com/for-social-change/new-leaf-docs/#test-accounts))
+- Delete test accounts on production (see [Database access section](https://github.com/for-social-change/new-leaf-docs/#database-access) and [Test accounts section](https://github.com/for-social-change/new-leaf-docs/#test-accounts))
 - There are some features that aren't covered by automated tests and I checked that they worked, but you may want to double-check these closer to the project launch:
   - Password recovery
   - Creating a new account
@@ -14,7 +14,7 @@
 - Production - https://fschome.org
 - Staging - https://fschome-staging.org
 - [Backend architecture and account creation flow diagram](https://app.diagrams.net/#G1kXaIACwYXgDjok23fmnl3792eVtrb1vK) (also in this repo as a pdf)
-- [Google doc with user requirements and future features](https://docs.google.com/document/d/13GYdpAW-aUbapH_Jkd6RKOgT9wqpYQ2f9lxtoPk7MZo/edit)
+- [Google doc with user requirements and future features](https://docs.google.com/document/d/13GYdpAW-aUbapH_Jkd6RKOgT9wqpYQ2f9lxtoPk7MZo/edit) (it may be helpful to look at the [E2E tests](https://github.com/for-social-change/new-leaf-e2e) for user requirements as well)
 
 ### Repositories
 - [Infrastructure](https://github.com/for-social-change/new-leaf-infrastructure)
