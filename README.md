@@ -93,7 +93,9 @@ This involves manually triggering GitHub workflows at certain points.
 
 ## Updating Twilio credentials
 If you need to update the Twilio account ID or auth token, run `kubectl edit secret -n notification-service zero-notification-service` and directly edit the values for `TWILIO_ACCOUNT_ID` and `TWILIO_ACCOUNT_ID` (you need to Base64 encode the values before entering them in).
+
 To update the phone number, run `kubectl edit configmap -n notification-service zero-notification-service` and directly edit the value for `TWILIO_PHONE_NUMBER`.
+
 The current credentials are stored in AWS Secrets Manager but they are just there for reference (they're not being pulled into the app anywhere).
 
 ## Test accounts
