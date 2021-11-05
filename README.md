@@ -91,6 +91,11 @@ This involves manually triggering GitHub workflows at certain points.
 - After the workflow completes, go to the [E2E repo](https://github.com/for-social-change/new-leaf-e2e) and manually run the `e2e tests` workflow which will run the Cypress E2E tests on staging. Avoid making changes on staging because they might cause these tests to fail.
 - If the workflow completes without errors or test failures, go back to the FE/BE repo and manually run the `Production deploy` workflow to deploy to production
 
+## Updating Twilio credentials
+If you need to update the Twilio account ID or auth token, run `kubectl edit secret -n notification-service zero-notification-service` and directly edit the values for `TWILIO_ACCOUNT_ID` and `TWILIO_ACCOUNT_ID` (you need to Base64 encode the values before entering them in).
+To update the phone number, run `kubectl edit configmap -n notification-service zero-notification-service` and directly edit the value for `TWILIO_PHONE_NUMBER`.
+The current credentials are stored in AWS Secrets Manager but they are just there for reference (they're not being pulled into the app anywhere).
+
 ## Test accounts
 The test accounts use maildrop emails for convenience but they are not secure (anyone can access these inboxes, go see at https://maildrop.cc) so the production test accounts should be deleted before the project launches. To delete accounts, delete the applicable rows in the `users` and `identities` tables (see the [Database Access section](https://github.com/for-social-change/new-leaf-docs/#database-access) for more info).
 
